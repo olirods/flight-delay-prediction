@@ -128,6 +128,16 @@ python3 resources/web/predict_flask.py
 
 Go to `http://localhost:5000/flights/delays/predict_kafka` to try the working application.
 
+### Checking the predictions records in the db
+
+You can enter to the MongoDB shell with `mongosh` and then follow:
+
+```
+> use agile_data_science;
+> db.flight_delay_classification_response.find()
+
+```
+
 ## Docker&Docker-Compose Up & Running
 
 `docker-compose up -d`
