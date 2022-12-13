@@ -120,6 +120,8 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
 
 We open IntelliJ with `intellij-idea-ultimate`. We open our project in the `flight_prediction` directory, install the necessary plugins and build the program. When that is finished, we can run the program.
 
+![Screenshot from 2022-12-14 00-09-23](https://user-images.githubusercontent.com/49884623/207467679-eda2c8a6-04c7-4561-8aaf-a8810b418400.png)
+
 ### Starting the prediction request web app
 
 ```bash
@@ -128,6 +130,8 @@ python3 resources/web/predict_flask.py
 
 Go to `http://localhost:5000/flights/delays/predict_kafka` to try the working application.
 
+![Screenshot from 2022-12-14 00-11-58](https://user-images.githubusercontent.com/49884623/207467632-c3097051-4864-4274-8df6-6c4adeb64637.png)
+
 ### Checking the predictions records in the db
 
 You can enter to the MongoDB shell with `mongosh` and then follow:
@@ -135,8 +139,9 @@ You can enter to the MongoDB shell with `mongosh` and then follow:
 ```
 > use agile_data_science;
 > db.flight_delay_classification_response.find()
-
 ```
+
+![Screenshot from 2022-12-14 00-22-32](https://user-images.githubusercontent.com/49884623/207467761-65938dfb-c3a3-4cae-aacf-584aa395c5de.png)
 
 ## Docker&Docker-Compose Up & Running
 
