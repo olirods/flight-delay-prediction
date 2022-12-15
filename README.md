@@ -143,12 +143,19 @@ bin/kafka-server-start.sh config/server.properties
 ```bash
  python3 resources/train_spark_mllib_model.py .
  ```
+ 
+![image](https://user-images.githubusercontent.com/49884623/207961819-77df56f4-7f7a-470f-b406-93201ad28019.png)
 
-### Running Flight Predictor
+### Running the prediction job
 
+#### Option 1: IntelliJ
 We open IntelliJ with `intellij-idea-ultimate`. We open our project in the `flight_prediction` directory, install the necessary plugins and build the program. When that is finished, we can run the program.
 
 ![Screenshot from 2022-12-14 00-09-23](https://user-images.githubusercontent.com/49884623/207467679-eda2c8a6-04c7-4561-8aaf-a8810b418400.png)
+
+#### Option 2: Spark Submit
+
+\*TODO\*
 
 ### Starting the prediction request web app
 
