@@ -114,6 +114,8 @@ bin/kafka-server-start.sh config/server.properties
 ### Creating a topic in Kafka
 
 ```bash
+ cd /opt/kafka
+
  bin/kafka-topics.sh \
   --create \
   --bootstrap-server localhost:9092 \
