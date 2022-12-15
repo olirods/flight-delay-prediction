@@ -1,4 +1,4 @@
-## Local Up & Running
+## Up & Running (local)
 
 These steps have been successfully reproduced in a system with Ubuntu 22.04 installed.
 
@@ -8,7 +8,7 @@ These steps have been successfully reproduced in a system with Ubuntu 22.04 inst
 resources/download_data.sh
 ```
 
-### Installing
+### Installing services
 
 First, we need to set an initial ENV variable indicating the path of this cloned repository, with `export PROJECT_HOME=/path/path`
 
@@ -87,7 +87,7 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
   sudo mv apache-zookeeper-3.5.10-bin.tar.gz /opt/zookeeper
   ```
   
-### Up & Running
+### Running the services
 
 We start the database with just:
 
