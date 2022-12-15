@@ -87,9 +87,9 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
   sudo mv apache-zookeeper-3.5.10-bin.tar.gz /opt/zookeeper
   ```
   
-### Running the services
+### Starting the database
 
-We start the database with just:
+We can do it with just:
 
 ```
 mongod
@@ -97,7 +97,9 @@ mongod
 
 We can check it's up with `service mongod status`.
 
-Then, for Kafka and Zookeper we need first to change the working directory to the Kafka installation one (`cd /opt/kafka`).
+### Starting Kafka and Zookeeper
+
+We need first to change the working directory to the Kafka installation one (`cd /opt/kafka`).
 
 We begin running Zookeeper:
 
@@ -124,11 +126,17 @@ bin/kafka-server-start.sh config/server.properties
   --topic flight_delay_classification_request
 ```
 
+![image](https://user-images.githubusercontent.com/49884623/207953370-cbaba93b-2324-40d1-bcfc-f5741b8fdc6f.png)
+
+
 ### Importing the distance records to MongoDB
 
 ```bash
 ./resources/import_distances.sh
 ```
+
+![image](https://user-images.githubusercontent.com/49884623/207953466-b9fb74ae-96cf-4b35-a8aa-634fc9199103.png)
+
 
 ### Training and saving the model
 
