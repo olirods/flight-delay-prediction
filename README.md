@@ -51,8 +51,6 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
 
   sudo mkdir -p /data/db
   sudo chown -R mongodb:mongodb /data/db
-
-  mongod
  ```
 
   * __Spark:__ we had to find the 3.1.2 version throughout the Internet. Following this steps:
@@ -81,8 +79,6 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
   sudo mv kafka_2.12-3.0.0 /opt/kafka
   ```
 
-  We start it going to the main directory (`cd /opt/kafka`) and running `bin/kafka-server-start.sh config/server.properties`.
-
   * __Zookeeper:__
 
   ```bash
@@ -90,8 +86,30 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
   tar xfvz apache-zookeeper-3.5.10-bin.tar.gz
   sudo mv apache-zookeeper-3.5.10-bin.tar.gz /opt/zookeeper
   ```
+  
+### Up & Running
 
-  We start it going to the Kafka directory (`cd /opt/kafka`) and running `bin/zookeeper-server-start.sh config/zookeeper.properties`.
+We start the database with just:
+
+```
+mongod
+```
+
+We can check it's up with `service mongod status`.
+
+Then, for Kafka and Zookeper we need first to change the working directory to the Kafka installation one (`cd /opt/kafka`).
+
+We begin running Zookeeper:
+
+```
+bin/zookeeper-server-start.sh config/zookeeper.properties
+```
+
+And then Kafka:
+
+```
+bin/kafka-server-start.sh config/server.properties
+```
 
 ### Creating a topic in Kafka
 
