@@ -1,6 +1,6 @@
 ## Local Up & Running
 
-We have used a computer with Ubuntu 22.04 installed.
+These steps have been successfully reproduced in a system with Ubuntu 22.04 installed.
 
 ### Downloading data
 
