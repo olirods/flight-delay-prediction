@@ -155,7 +155,29 @@ We open IntelliJ with `intellij-idea-ultimate`. We open our project in the `flig
 
 #### Option 2: Spark Submit
 
-\*TODO\*
+We'll first compile the code and build a JAR file using sbt:
+
+```
+cd flight_prediction
+sbt package
+```
+
+Then a new .jar package will have been created at `flight_prediction/target/scala-2.12/flight_prediction_2.12-0.1.jar`.
+
+Now, it's necessary to create a Spark master and a Spark worker to run the job. We go to the Spark installation directory (`cd /opt/spark`). We create the master:
+
+```
+./sbin/start-master.sh
+```
+
+If you go now to `http://localhost:8080` you can see info about this master node and you will see its URL at the top of the page. That is the one we need to create a worker for this master:
+
+```
+./sbin/start-worker.sh <master-spark-URL>
+```
+
+If you reload the Spark master page, you will see the worker associated.
+
 
 ### Starting the prediction request web app
 
