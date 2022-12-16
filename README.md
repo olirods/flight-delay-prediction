@@ -186,9 +186,9 @@ Finally, we are aready to launch the prediction job with spark-submit. Just use 
 ./bin/spark-submit \
   --class es.upm.dit.ging.predictor.MakePrediction \
   --master <master-spark-URL> \
-  --deploy-mode <deploy-mode> \
+  --deploy-mode cluster \
   --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 \
-  
+  flight_prediction/target/flight_prediction_2.12-0.1.jar
 ```
 
 If successfully, you will see then in the Spark master webpage that there is a new running driver for our job:
@@ -220,11 +220,9 @@ You can enter to the MongoDB shell with `mongosh` and then follow:
 
 `docker-compose up -d`
 
-### Kafka
+### Creating the topic in Kafka
 
 Ìnside container (`docker-compose exec kafka bash`):
-
- * Create the topic
  
 ```bash
 kafka-topics.sh --create \
@@ -234,11 +232,9 @@ kafka-topics.sh --create \
   --topic flight_delay_classification_request
 ```
 
-### MongoDB
+### Importing the distance records in MongoDB
 
 Inside container (`docker-compose exec mongodb bash`)
-
- * Import the distance records
 
  ```bash
  cd flight_prediction
