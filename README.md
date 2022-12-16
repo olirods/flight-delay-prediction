@@ -178,6 +178,22 @@ If you go now to `http://localhost:8080` you can see info about this master node
 
 If you reload the Spark master page, you will see the worker associated.
 
+![image](https://user-images.githubusercontent.com/49884623/208167788-77af5910-a3ba-4cb5-bcd7-cc6b99eb76d2.png)
+
+Finally, we are aready to launch the prediction job with spark-submit. Just use this command:
+
+```
+./bin/spark-submit \
+  --class es.upm.dit.ging.predictor.MakePrediction \
+  --master <master-spark-URL> \
+  --deploy-mode <deploy-mode> \
+  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 \
+  
+```
+
+If successfully, you will see then in the Spark master webpage that there is a new running driver for our job:
+
+![image](https://user-images.githubusercontent.com/49884623/208169174-3d4c7ef0-7b4b-4d7c-b661-0cd5f57ff867.png)
 
 ### Starting the prediction request web app
 
