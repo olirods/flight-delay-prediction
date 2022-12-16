@@ -296,7 +296,7 @@ def delays():
 from os import environ
 
 
-project_home = os.environ["PROJECT_HOME"]
+#project_home = os.environ["PROJECT_HOME"]
 # vectorizer = joblib.load("{}/models/sklearn_vectorizer.pkl".format(project_home))
 # regressor = joblib.load("{}/models/sklearn_regressor.pkl".format(project_home))
 
