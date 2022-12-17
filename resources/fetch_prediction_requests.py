@@ -51,7 +51,7 @@ def main(iso_date, base_path):
   
   # Load the day's requests using pymongo_spark
   prediction_requests = sc.mongoRDD(
-    'mongodb://localhost:27017/agile_data_science.prediction_tasks',
+    'mongodb://mongodb:27017/agile_data_science.prediction_tasks',
     config=mongo_query_config
   )
   

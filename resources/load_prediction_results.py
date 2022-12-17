@@ -42,7 +42,7 @@ def main(iso_date, base_path):
   
   # Store to MongoDB
   prediction_results.saveToMongoDB(
-    "mongodb://localhost:27017/agile_data_science.prediction_results"
+    "mongodb://mongodb:27017/agile_data_science.prediction_results"
   )
 
 if __name__ == "__main__":

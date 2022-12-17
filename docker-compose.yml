@@ -32,8 +32,8 @@ services:
     image: bitnami/spark:3.1.2
     environment:
       SPARK_MODE: master
-    volumes:
-      - ./flight_prediction/target/scala-2.12/flight_prediction_2.12-0.1.jar:/opt/bitnami/spark/data
+    ports:
+      - "8080:8080"
 
   spark-worker:
     image: bitnami/spark:3.1.2
@@ -42,6 +42,10 @@ services:
     environment:
       SPARK_MODE: worker
       SPARK_MASTER_URL: spark://spark-master:7077
+    volumes:
+      - ./models:/opt/bitnami/spark/models
+      - ./flight_prediction/target/scala-2.12:/opt/bitnami/spark/data
+      - ~/.ivy2:/opt/bitnami/spark/.ivy2
   
   web:
     build:

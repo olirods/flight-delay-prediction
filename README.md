@@ -2,13 +2,13 @@
 
 These steps have been successfully reproduced in a system with Ubuntu 22.04 installed.
 
-### Downloading data
+### 1. Downloading data
 
 ```bash
 resources/download_data.sh
 ```
 
-### Installing services
+### 2. Installing services
 
 First, we need to set an initial ENV variable indicating the path of this cloned repository, with `export PROJECT_HOME=/path/path`
 
@@ -87,7 +87,7 @@ Then, we set the ENV variable to indicate the path to our Java installation dire
   sudo mv apache-zookeeper-3.5.10-bin.tar.gz /opt/zookeeper
   ```
   
-### Starting the database
+### 3. Starting the database
 
 We can do it with just:
 
@@ -97,7 +97,7 @@ mongod
 
 We can check it's up with `service mongod status`.
 
-### Starting Kafka and Zookeeper
+### 4. Starting Kafka and Zookeeper
 
 We need first to change the working directory to the Kafka installation one (`cd /opt/kafka`).
 
@@ -113,7 +113,7 @@ And then Kafka:
 bin/kafka-server-start.sh config/server.properties
 ```
 
-### Creating a topic in Kafka
+### 5. Creating a topic in Kafka
 
 ```bash
  cd /opt/kafka
@@ -129,7 +129,7 @@ bin/kafka-server-start.sh config/server.properties
 ![image](https://user-images.githubusercontent.com/49884623/207953370-cbaba93b-2324-40d1-bcfc-f5741b8fdc6f.png)
 
 
-### Importing the distance records to MongoDB
+### 6. Importing the distance records to MongoDB
 
 ```bash
 ./resources/import_distances.sh
@@ -138,7 +138,7 @@ bin/kafka-server-start.sh config/server.properties
 ![image](https://user-images.githubusercontent.com/49884623/207953466-b9fb74ae-96cf-4b35-a8aa-634fc9199103.png)
 
 
-### Training and saving the model
+### 7. Training and saving the model
 
 ```bash
  python3 resources/train_spark_mllib_model.py .
@@ -146,7 +146,7 @@ bin/kafka-server-start.sh config/server.properties
  
 ![image](https://user-images.githubusercontent.com/49884623/207961819-77df56f4-7f7a-470f-b406-93201ad28019.png)
 
-### Running the prediction job
+### 8. Running the prediction job
 
 #### Option 1: IntelliJ
 We open IntelliJ with `intellij-idea-ultimate`. We open our project in the `flight_prediction` directory, install the necessary plugins and build the program. When that is finished, we can run the program.
@@ -195,7 +195,7 @@ If successfully, you will see then in the Spark master webpage that there is a n
 
 ![image](https://user-images.githubusercontent.com/49884623/208169174-3d4c7ef0-7b4b-4d7c-b661-0cd5f57ff867.png)
 
-### Starting the prediction request web app
+### 9. Starting the prediction request web app
 
 ```bash
 python3 resources/web/predict_flask.py
@@ -205,7 +205,7 @@ Go to `http://localhost:5000/flights/delays/predict_kafka` to try the working ap
 
 ![Screenshot from 2022-12-14 00-11-58](https://user-images.githubusercontent.com/49884623/207467632-c3097051-4864-4274-8df6-6c4adeb64637.png)
 
-### Checking the predictions records in the db
+### 10. Checking the predictions records in the db
 
 You can enter to the MongoDB shell with `mongosh` and then follow:
 
@@ -218,7 +218,7 @@ You can enter to the MongoDB shell with `mongosh` and then follow:
 
 ## Docker&Docker-Compose Up & Running
 
-`docker-compose up -d`
+To run all the system you just need to do `docker-compose up -d`. Before that, make sure you have all the necessary generated files, the ones you got from following steps 1 (downloaded data), 7 (trained models) and 8-2 (.jar package file). 
 
 ### Creating the topic in Kafka
 
@@ -232,7 +232,7 @@ kafka-topics.sh --create \
   --topic flight_delay_classification_request
 ```
 
-### Importing the distance records in MongoDB
+### Importing the distance records to MongoDB
 
 Inside container (`docker-compose exec mongodb bash`)
 
@@ -241,4 +241,17 @@ Inside container (`docker-compose exec mongodb bash`)
  ./resources/import_distances.sh
 
  ```
+
+### Running the prediction job with Spark-Submit
+
+Inside Spark worker container (`docker-compose exec spark-worker bash`)
+
+```bash
+./bin/spark-submit \
+  --class es.upm.dit.ging.predictor.MakePrediction \
+  --master spark://spark-master:7077 \
+  --deploy-mode cluster \
+  --packages org.mongodb.spark:mongo-spark-connector_2.12:3.0.1,org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 \
+  data/flight_prediction_2.12-0.1.jar
+```
 
