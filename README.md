@@ -255,3 +255,12 @@ Inside Spark worker container (`docker-compose exec spark-worker bash`)
   data/flight_prediction_2.12-0.1.jar
 ```
 
+:warning: For this to work, you must have an .ivy2 in your home directory with some cache dependencies (https://stackoverflow.com/questions/60630832/i-cannot-use-package-option-on-bitnami-spark-docker-container)
+
+### Making the prediction request!
+
+Finally, you can go to `http://localhost:5000/flights/delays/predict_kafka` and make a flight prediction request:
+
+![image](https://user-images.githubusercontent.com/49884623/208214116-d265315e-d3ab-4d73-a40b-236dc62190fe.png)
+
+
