@@ -232,16 +232,6 @@ kafka-topics.sh --create \
   --topic flight_delay_classification_request
 ```
 
-### Importing the distance records to MongoDB
-
-Inside container (`docker-compose exec mongodb bash`)
-
- ```bash
- cd flight_prediction
- ./resources/import_distances.sh
-
- ```
-
 ### Running the prediction job with Spark-Submit
 
 Inside Spark worker container (`docker-compose exec spark-worker bash`)
